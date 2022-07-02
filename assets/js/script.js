@@ -21,10 +21,22 @@ getCharacters(20);
 
 class Character {
   constructor({ name, image, species }) {
-    this._name = name;
-    this._image = image;
-    this._species = species;
+    this._name = () => name;
+    this._image = () => image;
+    this._species = () => species;
     this.show();
+  }
+
+  get name(){
+    return this._name()
+  }
+
+  get image(){
+    return this._image()
+  }
+
+  get species(){
+    return this._species()
   }
 
   show(){
@@ -35,17 +47,17 @@ class Character {
     cardImgContainer.classList.add("img-container");
   
     const cardImg = document.createElement("img");
-    cardImg.src = this._image;
+    cardImg.src = this.image;
   
     cardImgContainer.appendChild(cardImg);
   
     const cardName = document.createElement("p");
     cardName.classList.add("name");
-    cardName.textContent = "Name: "+this._name;
+    cardName.textContent = "Name: "+ this.name;
   
     const cardSpecies = document.createElement("p");
     cardSpecies.classList.add("species");
-    cardSpecies.textContent = "Species: "+this._species;
+    cardSpecies.textContent = "Species: "+ this.species;
   
     card.appendChild(cardImgContainer);
     card.appendChild(cardName);
